@@ -1,0 +1,10 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box; /* includes the box border and margin in the overall box size */
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 0;
+}
