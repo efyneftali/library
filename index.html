@@ -5,9 +5,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="normalize.css">
 	<link rel="stylesheet" href="style.css">
-	<script></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Raleway&display=swap" rel="stylesheet">
+	<script src="app.js" defer></scriptsrc></script>
 </head>
 <body>
-
+	<h1>Library</h1>
+	<button id="add-book_btn">Add Book</button>
+	<div id="library"></div>
+	<div class="modal">
+		<div class="modal-content">
+			<div id="book-form">
+				<!-- <label for="title">Title</label><br> -->
+				<span class="modal-close">X</span>
+				<h1>New Book</h1>
+				<input type="text" name="title" id="title" class="form-ctrl" placeholder="Title" >
+				<input type="text" name="author" id="author" placeholder="Author">
+				<input type="tex" name="pages" id="pages" placeholder="Pages">
+				<div>
+					<input type="checkbox" name="read-status" id="read-status"><label for="read-satutus"> I've read the book</label>
+				</div>
+				<button id="submit-btn">submit</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
