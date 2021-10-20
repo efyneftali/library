@@ -5,10 +5,6 @@ const submit_btn = document.getElementById("submit-btn")
 const modal = document.querySelector(".modal")
 const modalClose_btn = document.querySelector(".modal-close")
 
-
-
-
-
 addBook_btn.addEventListener('click', () =>{
     modal.classList.add("modal-active")
     
@@ -17,7 +13,7 @@ modalClose_btn.addEventListener('click', ()=>{
     modal.classList.remove("modal-active")
 
 })
-
+let delbtns 
 submit_btn.addEventListener('click', () =>{
     //take users input, make the book obj, 
     const title = document.getElementById("title").value
@@ -25,6 +21,7 @@ submit_btn.addEventListener('click', () =>{
     const pages = document.getElementById("pages").value
     const read_status = document.getElementById("read-status").checked
     console.log(read_status)
+  
     const book = new Book(title, author, pages, read_status)
 
     //apped book obj to array
@@ -34,25 +31,41 @@ submit_btn.addEventListener('click', () =>{
     displayBook(book)
     //Clear Form fields 
     clearForm()
-    console.log(myLibrary)
+    // console.log(myLibrary)
+    const allBooks = document.querySelectorAll(".book-card")
+    delbtns = document.querySelectorAll('.book-delBtn')
+    let delbtnsArr = Array.from(delbtns) 
+    delbtnsArr.forEach(btn=>{
+        btn.addEventListener('click', () =>{
+            allBooks[delbtnsArr.indexOf(btn)].remove()
+        })
+    })
+
+    const readBtn = Array.from(document.querySelectorAll(".book-readBtn"))
+    
+    readBtn.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+            
+            myLibrary[readBtn.indexOf(btn)].read_status = !myLibrary[readBtn.indexOf(btn)].read_status
+            if (myLibrary[readBtn.indexOf(btn)].read_status === true){
+                btn.textContent = "Read"
+            }else{
+                btn.textContent = "Not Read"
+            }
+        })
+    })
+
 });
 
-
-del_Btns.forEach(btn=>{
-    btn.addEventListener('click'), () =>{
-        // console.log(del_Btns.indexOf(btn))
-        console.log("hit")
-    }
-})
 // Book constructor
-function Book( title, author, pages){
+function Book( title, author, pages, read_status){
     this.title = title
     this.author = author
     this.pages = pages
-    this.read_status = false
+    this.read_status = read_status
 }
 Book.prototype.getInfo= function(){
-    return `${title} by ${author}, ${pages} pages`
+    return `${this.title} by ${this.author}, ${this.pages} pages`
 }
 Book.prototype.readBook = function(){
     this.read_status = true
@@ -60,7 +73,9 @@ Book.prototype.readBook = function(){
 Book.prototype.unreadBook = function(){
     this.read_status = false
 }
-
+// Book.prototype.deleteBook = function(){
+//     delete myLibrary[this]
+// }
 function displayBook(book){
     //have emptry hard with inputs fields, grab the info and 
     const bookCard = document.createElement('div')
@@ -81,15 +96,20 @@ function displayBook(book){
     pages.textContent = `${book.pages}`
     deleteBtn.textContent = 'Delete'
 
+
     if(book.read_status === true){
         readBtn.textContent = 'Read'    
     }else{
         readBtn.textContent = 'Not Read'    
     }
+    console.log(book.read_status)
 
+    
     bookCard.append(title, author, pages, readBtn, deleteBtn)
 
     library_div.append(bookCard)
+
+    
    
 }
 
@@ -103,21 +123,5 @@ function clearForm(){
     
 }
 
-function deleteBook(bookIndex){
-    
-    const allBooks = document.querySelectorAll(".book-card")
-    allBooks[bookIndex].remove()
-    
-}
 
-
-// when you click not read change the color to #d1e3f1;
-
-//local storage
-
-
-//authentication fire base and google
-
-
-//firestore 
 
